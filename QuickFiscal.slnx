@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="QuickFiscal.Core/QuickFiscal.Core.csproj" />
+  <Project Path="QuickFiscal.Web/QuickFiscal.Web.csproj" />
+</Solution>
