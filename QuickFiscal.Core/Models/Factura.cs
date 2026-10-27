@@ -9,7 +9,7 @@ public class Factura
     public DateOnly? Fecha { get; set; }
     public decimal? Itbis { get; set; }
     public decimal? Total { get; set; }
-
+    public List<DudaCampo> Dudas { get; set; } = [];
 
     public EstadoFactura Estado
     {
@@ -21,7 +21,9 @@ public class Factura
                 || Itbis is null
                 || Total is null;
 
-            return faltaCritico ? EstadoFactura.CamposFaltantes : EstadoFactura.Completa;
+            if (faltaCritico) return EstadoFactura.CamposFaltantes;
+
+            return Dudas.Count > 0 ? EstadoFactura.RevisarDudas : EstadoFactura.Completa;
         }
     }
 
