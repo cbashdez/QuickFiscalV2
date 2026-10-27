@@ -4,6 +4,9 @@ public class Factura
 {
     public int Id { get; set; }
 
+    /// <summary>
+    /// RNC del VENDEDOR. Nunca el de la empresa compradora (ver Empresa.Rnc).
+    /// </summary>
     public string? Rnc { get; set; }
     public string? Ncf { get; set; }
     public DateOnly? Fecha { get; set; }
