@@ -1,4 +1,6 @@
-﻿namespace QuickFiscal.Core.Models;
+﻿using QuickFiscal.Core.Constantes;
+
+namespace QuickFiscal.Core.Models;
 
 public class Factura
 {
@@ -12,6 +14,8 @@ public class Factura
     public DateOnly? Fecha { get; set; }
     public decimal? Itbis { get; set; }
     public decimal? Total { get; set; }
+    public string Categoria { get; set; } = CodigosDgii606.CategoriaPorDefecto;
+    public string FormaPago { get; set; } = CodigosDgii606.FormaPagoPorDefecto;
     public List<DudaCampo> Dudas { get; set; } = [];
 
     public EstadoFactura Estado
