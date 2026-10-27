@@ -10,4 +10,20 @@ public class Factura
     public decimal? Itbis { get; set; }
     public decimal? Total { get; set; }
 
+
+    public EstadoFactura Estado
+    {
+        get
+        {
+            var faltaCritico = string.IsNullOrWhiteSpace(Rnc)
+                || string.IsNullOrWhiteSpace(Ncf)
+                || Fecha is null
+                || Itbis is null
+                || Total is null;
+
+            return faltaCritico ? EstadoFactura.CamposFaltantes : EstadoFactura.Completa;
+        }
+    }
+
+
 }
