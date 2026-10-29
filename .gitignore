@@ -480,3 +480,9 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Base de datos local (contiene datos fiscales reales)
+App_Data/
+*.db
+*.db-shm
+*.db-wal
