@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using QuickFiscal.Infrastructure.Persistencia;
 using QuickFiscal.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+var cadenaConexion = builder.Configuration.GetConnectionString("QuickFiscal")
+    ?? throw new InvalidOperationException("Falta la cadena de conexión 'QuickFiscal' en appsettings.");
+
+builder.Services.AddInfraestructura(cadenaConexion, builder.Environment.ContentRootPath);
+
 var app = builder.Build();
+
+// Aplica las migraciones pendientes al arrancar
+using (var scope = app.Services.CreateScope())
+{
+    var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<AppDbContext>>();
+    using var db = factory.CreateDbContext();
+    db.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
